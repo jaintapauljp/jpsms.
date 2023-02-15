@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<classpath>
+	<classpathentry kind="src" path="presentation/src/main/java/"/>
+	<classpathentry kind="src" path="android-smsmms/src/main/java/"/>
+	<classpathentry kind="src" path="common/src/main/java/"/>
+	<classpathentry kind="lib" path="/workspace/source/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+</classpath>
