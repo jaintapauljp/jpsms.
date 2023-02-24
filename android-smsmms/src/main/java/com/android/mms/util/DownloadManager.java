@@ -130,7 +130,18 @@ public class DownloadManager {
         try {
             NotificationInd nInd = (NotificationInd) PduPersister.getPduPersister(mContext)
                     .load(uri);
-            if ((nInd.getExpiry() < System.currentTimeMillis() / 1000L)
+            /* ******** Warning********
+			 Possible null pointer dereference!
+			 Path: 
+				File: DownloadManager.java, Line: 131
+					NotificationInd nInd=(NotificationInd)PduPersister.getPduPersister(mContext).load(uri);
+			
+				File: DownloadManager.java, Line: 133
+					nInd.getExpiry()
+					nInd is referenced in method invocation.
+					The expression is enclosed inside an If statement.
+			*/
+			if ((nInd.getExpiry() < System.currentTimeMillis() / 1000L)
                     && (state == STATE_DOWNLOADING || state == STATE_PRE_DOWNLOADING)) {
                 mHandler.post(new Runnable() {
                     public void run() {
