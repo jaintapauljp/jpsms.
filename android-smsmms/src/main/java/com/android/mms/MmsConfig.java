@@ -154,7 +154,27 @@ public class MmsConfig {
     }
 
     public static int getHttpSocketTimeout() {
-        return mHttpSocketTimeout;
+        
+		/* ********OpenRefactory Warning********
+		 Potential data race detected!
+		
+		The data access in 
+		return mHttpSocketTimeout;
+		
+		may have race with 1 other access.
+		
+		The mentioned access is performed in a thread spawned by 
+		new Thread(this,"NotificationTransaction").start()
+		in file, NotificationTransaction.java.
+		
+		It may have contending concurrent access 
+		
+		in file, MmsConfig.java, class MmsConfig, method MmsConfig, 
+		
+		mHttpSocketTimeout=60 * 1000
+		
+		*/
+		return mHttpSocketTimeout;
     }
 
     public static boolean getNotifyWapMMSC() {
