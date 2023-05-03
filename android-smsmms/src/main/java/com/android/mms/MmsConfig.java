@@ -146,7 +146,27 @@ public class MmsConfig {
     }
 
     public static String getHttpParams() {
-        return mHttpParams;
+        
+		/* ********OpenRefactory Warning********
+		 Potential data race detected!
+		
+		The data access in 
+		return mHttpParams;
+		
+		may have race with 1 other access.
+		
+		The mentioned access is performed in a thread spawned by 
+		new Thread(this,"NotificationTransaction").start()
+		in file, NotificationTransaction.java.
+		
+		It may have contending concurrent access 
+		
+		in file, MmsConfig.java, class MmsConfig, method MmsConfig, 
+		
+		mHttpParams=null
+		
+		*/
+		return mHttpParams;
     }
 
     public static String getHttpParamsLine1Key() {
