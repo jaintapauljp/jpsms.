@@ -482,7 +482,25 @@ public class PduComposer {
             case PduHeaders.MMS_VERSION:
                 appendOctet(field);
 
-                int version = mPduHeader.getOctet(field);
+			/* ******** Warning********
+			 Possible null pointer dereference!
+			 Path: 
+				File: ReadRecTransaction.java, Line: 83
+					byte[] postingData=new PduComposer(mContext,readRecInd).make();
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+				File: PduComposer.java, Line: 167
+					makeAckInd()
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 746
+					appendHeader(PduHeaders.MMS_VERSION)
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 485
+					int version=mPduHeader.getOctet(field);
+					mPduHeader is referenced in method invocation.
+			*/
+			int version = mPduHeader.getOctet(field);
                 if (0 == version) {
                     appendShortInteger(PduHeaders.CURRENT_MMS_VERSION);
                 } else {
