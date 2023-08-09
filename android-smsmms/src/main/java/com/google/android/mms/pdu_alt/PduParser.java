@@ -190,7 +190,18 @@ public class PduParser {
                     // or "application/vnd.wap.multipart.alternative"
                     return retrieveConf;
                 } else if (ctTypeStr.equals(ContentType.MULTIPART_ALTERNATIVE)) {
-                    // "application/vnd.wap.multipart.alternative"
+                    
+					/* ********OpenRefactory Warning********
+					 Possible null pointer dereference!
+					 Path: 
+						File: RetrieveTransaction.java, Line: 142
+							RetrieveConf retrieveConf=(RetrieveConf)new PduParser(resp).parse();
+							 Information about field mBody (from class PduParser) is passed through the method call. This later results into a null pointer dereference
+						File: PduParser.java, Line: 195
+							PduPart firstPart=mBody.getPart(0);
+							mBody is referenced in method invocation.
+					*/
+					// "application/vnd.wap.multipart.alternative"
                     // should take only the first part.
                     PduPart firstPart = mBody.getPart(0);
                     mBody.removeAll();
