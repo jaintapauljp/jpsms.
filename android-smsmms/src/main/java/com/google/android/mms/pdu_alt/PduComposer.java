@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+//  Adding my comment
+//  @ataf
+
 package com.google.android.mms.pdu_alt;
 
 import android.content.ContentResolver;
@@ -573,7 +576,25 @@ public class PduComposer {
                 break;
 
             case PduHeaders.DATE:
-                long date = mPduHeader.getLongInteger(field);
+			/* ********OpenRefactory Warning********
+			 Possible null pointer dereference!
+			 Path: 
+				File: ReadRecTransaction.java, Line: 83
+					byte[] postingData=new PduComposer(mContext,readRecInd).make();
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+				File: PduComposer.java, Line: 172
+					makeReadRecInd()
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 666
+					appendHeader(PduHeaders.MESSAGE_ID)
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 576
+					long date=mPduHeader.getLongInteger(field);
+					mPduHeader is referenced in method invocation.
+			*/
+			long date = mPduHeader.getLongInteger(field);
                 if (-1 == date) {
                     return PDU_COMPOSE_FIELD_NOT_SET;
                 }
@@ -618,7 +639,25 @@ public class PduComposer {
                 break;
 
             case PduHeaders.EXPIRY:
-                long expiry = mPduHeader.getLongInteger(field);
+			/* ********OpenRefactory Warning********
+			 Possible null pointer dereference!
+			 Path: 
+				File: ReadRecTransaction.java, Line: 83
+					byte[] postingData=new PduComposer(mContext,readRecInd).make();
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+				File: PduComposer.java, Line: 172
+					makeReadRecInd()
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 671
+					appendHeader(PduHeaders.TO)
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 621
+					long expiry=mPduHeader.getLongInteger(field);
+					mPduHeader is referenced in method invocation.
+			*/
+			long expiry = mPduHeader.getLongInteger(field);
                 if (-1 == expiry) {
                     return PDU_COMPOSE_FIELD_NOT_SET;
                 }
