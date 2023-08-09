@@ -769,7 +769,21 @@ public class PduComposer {
         // X-Mms-Transaction-ID
         appendOctet(PduHeaders.TRANSACTION_ID);
 
-        byte[] trid = mPduHeader.getTextString(PduHeaders.TRANSACTION_ID);
+        /* ********OpenRefactory Warning********
+		 Possible null pointer dereference!
+		 Path: 
+			File: ReadRecTransaction.java, Line: 83
+				byte[] postingData=new PduComposer(mContext,readRecInd).make();
+				 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+			File: PduComposer.java, Line: 157
+				makeSendReqPdu()
+				 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+				The expression is enclosed inside an If statement.
+			File: PduComposer.java, Line: 772
+				byte[] trid=mPduHeader.getTextString(PduHeaders.TRANSACTION_ID);
+				mPduHeader is referenced in method invocation.
+		*/
+		byte[] trid = mPduHeader.getTextString(PduHeaders.TRANSACTION_ID);
         if (trid == null) {
             // Transaction-ID should be set(by Transaction) before make().
             throw new IllegalArgumentException("Transaction-ID is null.");
