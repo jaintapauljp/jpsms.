@@ -21,6 +21,9 @@ import android.content.Context;
 import android.text.TextUtils;
 import timber.log.Timber;
 
+// just a comment
+// amptjer cp,,emt
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -618,7 +621,25 @@ public class PduComposer {
                 break;
 
             case PduHeaders.EXPIRY:
-                long expiry = mPduHeader.getLongInteger(field);
+			/* ********OpenRefactory Warning********
+			 Possible null pointer dereference!
+			 Path: 
+				File: ReadRecTransaction.java, Line: 83
+					byte[] postingData=new PduComposer(mContext,readRecInd).make();
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+				File: PduComposer.java, Line: 172
+					makeReadRecInd()
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 671
+					appendHeader(PduHeaders.TO)
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 621
+					long expiry=mPduHeader.getLongInteger(field);
+					mPduHeader is referenced in method invocation.
+			*/
+			long expiry = mPduHeader.getLongInteger(field);
                 if (-1 == expiry) {
                     return PDU_COMPOSE_FIELD_NOT_SET;
                 }
