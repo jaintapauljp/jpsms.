@@ -527,7 +527,25 @@ public class PduComposer {
                 // Value-length (Address-present-token Encoded-string-value | Insert-address-token)
                 appendOctet(field);
 
-                EncodedStringValue from = mPduHeader.getEncodedStringValue(field);
+			/* ********OpenRefactory Warning********
+			 Possible null pointer dereference!
+			 Path: 
+				File: ReadRecTransaction.java, Line: 83
+					byte[] postingData=new PduComposer(mContext,readRecInd).make();
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+				File: PduComposer.java, Line: 172
+					makeReadRecInd()
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 661
+					appendHeader(PduHeaders.MMS_VERSION)
+					 Information about field mPduHeader (from class PduComposer) is passed through the method call. This later results into a null pointer dereference
+					The expression is enclosed inside an If statement.
+				File: PduComposer.java, Line: 530
+					EncodedStringValue from=mPduHeader.getEncodedStringValue(field);
+					mPduHeader is referenced in method invocation.
+			*/
+			EncodedStringValue from = mPduHeader.getEncodedStringValue(field);
                 if ((from == null)
                         || TextUtils.isEmpty(from.getString())
                         || new String(from.getTextString()).equals(
